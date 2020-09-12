@@ -7,7 +7,7 @@
 # Stop in case of any error.
 set -e
 
-source /opt/ros/noetic/setup.bash
+source /opt/ros/kinetic/setup.bash
 
 # Create catkin workspace.
 mkdir -p ${CATKIN_WS}/src

@@ -1,5 +1,5 @@
-image_width: 640
-image_height: 480
+image_width: 1280 #640
+image_height: 720 #480
 camera_name: dope_webcam_0
 camera_matrix:
   rows: 3

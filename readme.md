@@ -1,5 +1,15 @@
+```
+    ./run_dope_docker.sh nvidia-dope-v1
+    sudo docker exec -it nvidia-dope-v1 bash
+    roslaunch dope camera.launch
+    roslaunch dope dope.launch
+	./train.py --data ../data/soloprt_3/solomon_part/ --datatest ../data/soloprt_3/test/ --imagesize 512 --outf soloprt_3 --pretrained False --batchsize 8
+```
+
+
+
 [![License CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
-![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)
+![Python 2.7](https://img.shields.io/badge/python-2.7-green.svg)
 # Deep Object Pose Estimation - ROS Inference
 
 This is the official DOPE ROS package for detection and 6-DoF pose estimation of **known objects** from an RGB camera.  The network has been trained on the following YCB objects:  cracker box, sugar box, tomato soup can, mustard bottle, potted meat can, and gelatin box.  For more details, see our [CoRL 2018 paper](https://arxiv.org/abs/1809.10790) and [video](https://youtu.be/yVGViBqWtBI).
@@ -8,28 +18,24 @@ This is the official DOPE ROS package for detection and 6-DoF pose estimation of
 
 ![DOPE Objects](dope_objects.png)
 
-## Updates 
-2020/03/09 - Added HOPE [weights to google drive](https://drive.google.com/open?id=1DfoA3m_Bm0fW8tOWXGVxi4ETlLEAgmcg), [the 3d models](https://drive.google.com/drive/folders/1jiJS9KgcYAkfb8KJPp5MRlB0P11BStft), and the objects dimensions to config. [Tremblay et al., IROS 2020](https://arxiv.org/abs/2008.11822).
+## Update 
+16/03/2020 - Added a wiki (thanks to [@saratrajput](https://github.com/saratrajput)) 
 
-2020/02/09 - Upgraded DOPE to use Python 3. Updated Dockerfile to use Python3-compatible ROS Noetic. The Python 2.7/ROS Kinetic is still available on the ['ros-kinetic' branch](https://github.com/NVlabs/Deep_Object_Pose/tree/ros-kinetic).
+03/07/2019 - ROS interface update (thanks to Martin Günther)
 
-2020/16/03 - Added a wiki (thanks to [@saratrajput](https://github.com/saratrajput)) 
-
-2019/03/07 - ROS interface update (thanks to Martin Günther)
-
-2019/11/06 - Added bleach YCB weights 
+11/06/2019 - Added bleach YCB weights 
 
 ## Installing
 
-We have tested on Ubuntu 18.04 with ROS Noetic with an NVIDIA Titan X and RTX 2080ti with python 3.8.  The code may work on other systems.
+We have tested on Ubuntu 16.04 and 18.04 with ROS Kinetic and Lunar with an NVIDIA Titan X and RTX 2080ti with python 2.7.  The code may work on other systems.
 
 The following steps describe the native installation. Alternatively, use the provided [Docker image](docker/readme.md) and skip to Step #7.
 
 1. **Install ROS**
 
-    Follow these [instructions](http://wiki.ros.org/noetic/Installation/Ubuntu).
+    Follow these [instructions](http://wiki.ros.org/kinetic/Installation/Ubuntu).
     You can select any of the default configurations in step 1.4; even the
-    ROS-Base (Bare Bones) package (`ros-noetic-ros-base`) is enough.
+    ROS-Base (Bare Bones) package (`ros-kinetic-ros-base`) is enough.
 
 2. **Create a catkin workspace** (if you do not already have one). To create a catkin workspace, follow these [instructions](http://wiki.ros.org/catkin/Tutorials/create_a_workspace):
     ```
@@ -47,14 +53,14 @@ The following steps describe the native installation. Alternatively, use the pro
 4. **Install python dependencies**
     ```
     $ cd ~/catkin_ws/src/dope
-    $ python3 -m pip install -r requirements.txt
+    $ pip install -r requirements.txt
     ```
 
 5. **Install ROS dependencies**
     ```
     $ cd ~/catkin_ws
-    $ rosdep install --from-paths src -i --rosdistro noetic
-    $ sudo apt-get install ros-noetic-rosbash ros-noetic-ros-comm
+    $ rosdep install --from-paths src -i --rosdistro kinetic
+    $ sudo apt-get install ros-kinetic-rosbash ros-kinetic-ros-comm
     ```
 
 6. **Build**
@@ -136,20 +142,8 @@ The following steps describe the native installation. Alternatively, use the pro
 
 DOPE returns the poses of the objects in the camera coordinate frame.  DOPE uses the aligned YCB models, which can be obtained using [NVDU](https://github.com/NVIDIA/Dataset_Utilities) (see the `nvdu_ycb` command).
 
-## HOPE 3D Models
 
-![HOPE 3D models rendered in UE4](https://i.imgur.com/V6wX64p.png)
-
-We introduce new toy 3d models that you download [here](https://drive.google.com/drive/folders/1jiJS9KgcYAkfb8KJPp5MRlB0P11BStft). 
-The folders are arranged like the YCB 3d models organization. 
-You can buy the real objects using the following links 
-[set 1](https://www.amazon.com/gp/product/B071ZMT9S2), 
-[set 2](https://www.amazon.com/gp/product/B007EA6PKS), 
-[set 3](https://www.amazon.com/gp/product/B00H4SKSPS), 
-and 
-[set 4](https://www.amazon.com/gp/product/B072M2PGX9). 
-
-## How to cite DOPE 
+## Citation
 
 If you use this tool in a research project, please cite as follows:
 ```

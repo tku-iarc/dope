@@ -377,7 +377,7 @@ class MultipleVertexJson(data.Dataset):
             target_transform = None,
             loader = default_loader, 
             objectsofinterest = "",
-            img_size = 400,
+            img_size = 512,
             save = False,  
             noise = 2,
             data_size = None,
@@ -437,7 +437,7 @@ class MultipleVertexJson(data.Dataset):
         img = self.loader(path)
 
         img_size = img.size
-        img_size = (400,400)
+        img_size = (512,512)
 
         loader = loadjson
         
@@ -1098,12 +1098,12 @@ parser.add_argument('--object',
 
 parser.add_argument('--workers', 
     type=int, 
-    default=8,
+    default=0,
     help='number of data loading workers')
 
 parser.add_argument('--batchsize', 
     type=int, 
-    default=32, 
+    default=16, 
     help='input batch size')
 
 parser.add_argument('--imagesize', 
@@ -1135,12 +1135,12 @@ parser.add_argument('--manualseed',
 
 parser.add_argument('--epochs', 
     type=int, 
-    default=60,
+    default=400,
     help="number of epochs to train")
 
 parser.add_argument('--loginterval', 
     type=int, 
-    default=100)
+    default=10)
 
 parser.add_argument('--gpuids',
     nargs='+', 
